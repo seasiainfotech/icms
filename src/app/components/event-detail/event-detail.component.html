@@ -1,0 +1,195 @@
+<section class="slider">
+    <div>
+        <!-- Indicators -->
+
+
+        <!-- Wrapper for slides -->
+        <div class="">
+            <div class="item active">
+                <img src="../../assets/img/event-banner.jpg" alt="Chania" class="img-responsive">
+                <div class="carousel-caption text-center">
+
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Left and right controls -->
+
+    </div>
+</section>
+
+<section class="about-section text-center outer-section event-page">
+    <div class="container">
+        <div class="inner-section">
+            <div class="row">
+                <div class="col-md-5 event-page-img">
+                    <img class="img-responsive" src="../../assets/img/logo-1.png">
+                </div>
+                <div class="col-md-7">
+                    <div class="inner-content event-page-content">
+                        <h2 style="text-transform:capitalize;">{{detailData.event.title}}</h2>
+                        <h4><span class="pink-clr">DATE &amp; TIME : </span>{{convertUtc(detailData.event.start_date_time)}}
+                            onwards
+                        </h4>
+                        <h4><span class="pink-clr">VENUE : </span>{{detailData.event.location_name}}</h4>
+                        <h4><span class="pink-clr">CONFERENCE TYPE :</span> {{detailData.event.eventType}}</h4>
+                        <h4><span class="pink-clr">CATEGORY : </span> {{detailData.event.eventCategory}}</h4>
+                        <p>{{detailData.event.description}} </p>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+</section>
+
+<section class="event-list">
+    <div class="container">
+        <div class="event-page-outer">
+            <div class="event-page-heading">
+                <h2>IMAGE GALLERY</h2>
+            </div>
+         
+            <div>
+                <ng-image-slider [images]="arrayImage"></ng-image-slider>
+            </div>
+            <!-- <div class="row">
+                <div class="col-md-12 gallery-section">
+                    <ul class="gallery list-inline">
+                    
+                        <li class="audio-box">
+                                
+                            <a href="{{detailData.event.eventImage}}" data-lightbox="roadtrip" class="big" >
+                               
+                                <div *ngIf="!img1">
+                                    <img class="img-responsive" src="{{detailData.event.eventImage}}"  style="max-height: 150px;min-height: 150px">
+                                </div>
+                            </a>
+                        </li>
+
+                        <li class="audio-box">
+                            
+                            <a href="{{detailData.event.eventImage2}}" class="big">
+                                   
+                                        <div *ngIf="!img2">
+                                            <img class="img-responsive" src="{{detailData.event.eventImage2}}" style="max-height: 150px ;min-height: 150px">
+                                        </div>
+                            </a>
+                        </li>
+
+
+                        <li class="audio-box">
+                            <a href="{{detailData.event.eventImage3}}" class="big">
+                                    
+                                        <div *ngIf="!img3">  
+                                            <img class="img-responsive" src="{{detailData.event.eventImage3}}" style="max-height: 150px;min-height: 150px">
+                                        </div>
+
+                            </a>
+                        </li>
+
+                        <li class="audio-box">
+                            <a href="{{detailData.event.eventImage4}}" class="big">
+                                
+                                        <div *ngIf="!img4">
+                                                
+                                            <img class="img-responsive" src="{{detailData.event.eventImage4}}" style="max-height: 150px;min-height: 150px" >
+                                        </div>
+                            </a>
+                        </li>
+
+                        <li class="audio-box">
+                            <a href="{{detailData.event.eventImage5}}" class="big">
+                                  
+                                        <div *ngIf="!img5">
+                                                 
+                                            <img class="img-responsive" src="{{detailData.event.eventImage5}}" style="max-height: 150px;min-height: 150px">
+                                        </div>
+
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div> -->
+        </div>
+    </div>
+</section>
+
+<section class="">
+    <div class="container">
+        <div class="event-page-heading ">
+            <h2>SPEAKERS</h2>
+        </div>
+        <div id="carousel-example-generic" class="carousel slide carousel-inner" data-ride="carousel">
+            <!-- Indicators -->
+
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner custom-carousel" role="listbox">
+                <div class="carousel-inner">
+                    <div class="col-md-6 gallery-cell" *ngFor="let session of detailData.event.speaker">
+                        <div class="speakers-person">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <img class="img-responsive" src="{{session.speakerImage}}">
+                                </div>
+                                
+                                <div class="col-md-9">
+                                    <div class="speaker-content">
+                                        <h4 class="ft-bold"><span class="pink-clr">NAME : </span>{{session.name}}</h4>
+                                        <h4 class="ft-bold"><span class="pink-clr">OCCUPATION : </span>
+                                            {{session.qualification}}
+                                        </h4>
+                                        <p>{{session.description}}</p>
+                                        <ul class="social-icons list-inline">
+                                            <li><a href="https://www.facebook.com"><img src="../../assets/img/small-fb.png"></a></li>
+                                            <li><a href="https://www.twitter.com"><img src="../../assets/img/small-twitter.png"></a></li>
+                                            <li><a href="https://www.google.com"><img src="../../assets/img/small-google.png"></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="session">
+    <div class="container">
+        <div class="event-page-heading ">
+            <h2>SESSIONS</h2>
+        </div>
+        <div class="session-outer">
+
+            <div class="row">
+                <div class="col-md-12" *ngFor="let sessions of detailData.event.session; let ind = index">
+                    <div class="session-inner">
+                        <h4><span class="pink-clr">TITLE : </span> {{sessions.title}}</h4>
+                        <h4> <span class="pink-clr">DETAILS</span></h4>
+                        <p>{{sessions.description}}</p>
+                        <h4><span class="pink-clr">SPEAKERS: </span>{{speakersName[ind]}}</h4>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<section class="book-now">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <a href="javascript:;" class="btn btn-primary pink-btn" role="button" routerLink='/bookNow/:{{detailData.event.event_id}}'>BOOK
+                    NOW</a>
+            </div>
+        </div>
+    </div>
+</section>
