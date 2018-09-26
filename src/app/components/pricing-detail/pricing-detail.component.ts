@@ -35,13 +35,15 @@ export class PricingDetailComponent implements OnInit {
     { 'size': '0', 'diameter': '16000 km' },
     { 'size': '1', 'diameter': '32000 km' }
   ];
+  public session;
+  public fullEventCheckbox;
 
   constructor(private _usersService: UsersService, private _checkConnection: InternetConnection, private route: ActivatedRoute) {
     this.route.params.subscribe(params => {
       this.eventId = params['eventId'];
 
     });
-   
+
   }
 
   ngOnInit() {
@@ -53,17 +55,21 @@ export class PricingDetailComponent implements OnInit {
         this._usersService.getEventDetail("eventdetails?event_id=" + id[1] + "")
           .subscribe(data => {
             this.detailData = data;
-            console.log("event-detail", this.detailData);
-           var session = this.detailData.event.session
+            console.log('this.detailData', this.detailData);
+            this.session = this.detailData.event.session
 
-           for (var i = 0; i < this.detailData.event.session.length; i++) {
-      
-            this.detailData.event.session[i].checked = "";
-            console.log("Hellowfjhfjfj")
-          }  
+            for (var i in this.session) {
+              this.session[i]['checked'] = false;
+              console.log(this.session[i]);
+            }
+
+            for (var i = 0; i < this.detailData.event.session.length; i++) {
+              this.detailData.event.session[i].checked = "";
+              console.log("Hellowfjhfjfj")
+            }
           //  for(var i = 0;i<= session.length;i++){
           //     this.chechedValue = session.checked
-            
+
           //  }
           })
 
@@ -93,6 +99,8 @@ export class PricingDetailComponent implements OnInit {
       }
 
     });
+
+    this.fullEventCheckbox = false;
   }
 
   onKey(event) {
@@ -106,36 +114,42 @@ export class PricingDetailComponent implements OnInit {
        console.log(i);
        this.item.push(i) ;
     }
-   
+
   }
 
-  // get session price 
+  // get session price
 
   getPrize(event) {
     this.inputValue = event.target.value;
    console.log("prize:", this.inputValue)
   }
 
-  //get UserDetail 
+  //get UserDetail
 
   getUserDetail(event) {
     this.inputValue = event.target.value;
    console.log("userDetail:", this.inputValue)
   }
-  
-  
-  //getIndex
 
-  getIndex = function(i){
-    console.log("index",i)
-    this.prize = this.detailData.event.session[i].ticket_price
-    console.log(this.prize)
+  performCheck = function(event, i) {
+    this.prize = this.detailData.event.session[i].ticket_price;
+
+
   }
 
 
-  fullEventClicked(event,full) {
+  fullEventClicked(event, full) {
+
+    //check if full event checkbox checked-----------
+    if (this.fullEventCheckbox === true) {
+      for (const i in this.session) {
+        this.session[i].checked = false;
+      }
+    }
+    //-----------------------------------------------
+
     if(full==="true"){
-     
+
       if ( event.target.checked ==true ) {
        // this.selectAll();
        // this.full_eventChecked=true;
@@ -145,22 +159,40 @@ export class PricingDetailComponent implements OnInit {
        // this.chechedValue = false
        for(let i = 0;i <= this.emailFormArray.length;i++){
           // this.sessionClicked(event,false)
-          
+
        }
-       
+
    }else{
     console.log("clicked............................false");
     this.totalamount="";
-     
+
   //  this.chechedValue = true
     //this.full_eventChecked=false;;
    }
     }
-    
+
   }
 
   // session clicked
   sessionClicked(event, full) {
+
+    // check if all checkbox checked-----------------
+    let isAnyChecked = 0;
+    for (const i in this.session) {
+      if (this.session[i].checked === true) {
+        isAnyChecked = 1;
+        break;
+      }
+    }
+
+    if (isAnyChecked === 1) {
+      this.fullEventCheckbox = false;
+    } else {
+      this.fullEventCheckbox = true;
+    }
+    //------------------------------------------------
+
+
     if(full==="true"){
       if ( event.target.checked ==true ) {
       //  this.full_eventChecked=false;
@@ -168,25 +200,25 @@ export class PricingDetailComponent implements OnInit {
         this.totalPize = this.prize + this.totalPize
         this.totalamount="$"+this.totalPize;
         this.emailFormArray.push(full);
-      
+
         console.log("clicked............................true","Total prize is:",this.emailFormArray);
    }else{
     console.log("clicked............................false",this.emailFormArray);
     let index = this.emailFormArray.indexOf(full);
     this.emailFormArray.splice(index,1);
-    this.totalPize =  this.totalPize - this.prize 
+    this.totalPize =  this.totalPize - this.prize
     this.totalamount= this.totalPize;
    // this.sessionEditable = false;
    }
     }
   }
- 
+
   selectAll() {
     for (var i = 0; i < this.detailData.event.session.length; i++) {
-      
+
       this.detailData.event.session[i].checked = true;
       console.log("Hellowfjhfjfj")
-    }  
+    }
   }
 
   onChange(email:string, isChecked: boolean) {
@@ -198,6 +230,6 @@ export class PricingDetailComponent implements OnInit {
     }
 }
 
- 
+
 
 }

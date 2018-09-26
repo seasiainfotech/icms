@@ -1,8 +1,8 @@
 <section class="slider">
     <div>
       <!-- Indicators -->
-  
-  
+
+
       <!-- Wrapper for slides -->
       <div class="">
         <div class="item active">
@@ -12,13 +12,13 @@
               <img src="../assets/img/center-img.png">
             </div>
             <h3>Lorem ipsum event</h3>
-  
+
           </div>
         </div>
       </div>
-  
+
       <!-- Left and right controls -->
-  
+
     </div>
   </section>
   <section class="price-section">
@@ -33,23 +33,28 @@
               </div>
               </div>
               <div class="row">
-                  <div class="col-md-5 col-md-offset-4">
-                <div class="form-inner" *ngFor="let session of detailData.event.session;let i = index">
-                  <label class="mx-wd text-left"><input type="checkbox"  (change)="sessionClicked($event,'true'); "  (click)= "getIndex(i)" > {{session.title}}</label>
-              <span class="pink-clr ft-bold mr-l" >${{session.ticket_price}}</span>
-        
+                <div class="col-md-5 col-md-offset-4">
+                  <div class="form-inner" *ngFor="let ses of session; let i = index">
+                    <label class="mx-wd text-left">
+                      <input type="checkbox" (change)="sessionClicked($event,'true');"
+                             (click)= "performCheck($event, i)" [(ngModel)]="ses.checked" name = "ses._id">
+                      {{ses.title}}
+                    </label>
+                    <span class="pink-clr ft-bold mr-l" >${{ses.ticket_price}}</span>
+                  </div>
                 </div>
               </div>
-              </div>
-                <div class="row">
-                    <div class="col-md-5 col-md-offset-4">
-                <div class="form-inner full-event">
-                  
-                  <label class="mx-wd text-left"><input type="checkbox" checked='full_eventChecked' (change)="fullEventClicked($event,'true')"><span class="pink-clr">FULL
-                      EVENT</span> </label>
-                  <span class="pink-clr ft-bold mr-l">${{detailData.event.ticket_price}}</span>
+              <div class="row">
+                <div class="col-md-5 col-md-offset-4">
+                  <div class="form-inner full-event">
+                    <label class="mx-wd text-left">
+                      <input type="checkbox" checked='full_eventChecked' (change)="fullEventClicked($event, 'true')"
+                      name = "fullEvent" [(ngModel)] = "fullEventCheckbox">
+                      <span class="pink-clr">FULL EVENT</span>
+                    </label>
+                    <span class="pink-clr ft-bold mr-l">${{detailData.event.ticket_price}}</span>
+                  </div>
                 </div>
-              </div>
               </div>
               <div class="row">
                   <div class="col-md-5 col-md-offset-4">
@@ -65,15 +70,15 @@
                     <div class="form-group">
                       <input type="name" class="form-control" id="name" placeholder="Name"  required=true>
                     </div>
-  
+
                     <div class="form-group">
                       <input type="email" class="form-control" id="email" placeholder="Email"  required=true>
                     </div>
                     <div class="col-md-5 col-md-offset-4 col-sm-5 col-xs-12  text-center">
                       <a href="javascript:;" class="btn btn-primary pink-btn" role="button">Click</a>
                     </div>
-                    
-  
+
+
                   </form>
                 </div>
               </div>
@@ -91,8 +96,10 @@
           </div>
         </div>
       </div>
-  
+
     </div>
   </section>
-  
-  
+
+<pre>
+{{session|json}}
+</pre>
