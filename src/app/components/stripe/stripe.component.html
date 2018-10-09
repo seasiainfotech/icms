@@ -1,0 +1,38 @@
+<!-- #card-info element will be the container for the Stripe Elements -->
+<section class="slider">
+  <div>
+    <!-- Indicators -->
+
+
+    <!-- Wrapper for slides -->
+    <div class="">
+      <div class="item active">
+        <img src="../assets/img/event-banner.jpg" alt="Chania" class="img-responsive">
+        <div class="carousel-caption text-center">
+          <div class="center-pic">
+            <img src="../assets/img/center-img.png">
+          </div>
+          <h3>{{organizerDetail.organiser.businessName}} event</h3>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Left and right controls -->
+
+  </div>
+</section>
+<section class="price-section">
+  <div>
+<form #checkout="ngForm" (ngSubmit)="onSubmit(checkout)" class="checkout">
+  <div class="form-row">
+  <label for="card-info" style="margin-top: 20px; color: #81c34b;font-size: 19px">CARD INFO</label>
+  <div id="card-info" #cardInfo></div>
+  
+  <div id="card-errors" role="alert" *ngIf="error">{{ error }}</div>
+  </div>
+  
+  <button type="submit">Pay ${{price}}</button>
+  </form>
+  </div>
+  </section>

@@ -11,13 +11,15 @@
                   <div class="center-pic">
                       <img  src="../assets/img/center-img.png">
                   </div>
-                  <h3>Lorem ipsum event</h3>
+                  <h3 style="text-transform: capitalize">{{organiserDetail.organiser.businessName}} event</h3>
 
               </div>
           </div>
       </div>
 
       <!-- Left and right controls -->
+
+      <app-alerts></app-alerts> 
 
   </div>
 </section>
@@ -30,10 +32,10 @@
               </div>
               <div class="col-md-7"> 
                   <div class="inner-content">
-                      <h2>Lorem Ipsum</h2>
-                      <h5>loremIpsum@gmail.com</h5>
-                      <p>A smart software to manage all aspects of your conferences using latest technology like Big Data analysis, Artificial Intelligence, BLE devices and various other Sensors. From creating branded conference websites to detailed registration forms. From building delegate agendas to managing online payments. From badges and barcode scanning to in-depth analysis on attendance and revenue. </p>
-                      <p>Conference planning is stressful enough, with a variety of challenges that impact your planning efforts. </p>
+                      <h2>{{organiserDetail.organiser.first_name+" "+organiserDetail.organiser.last_name}}</h2>
+                      <h5>{{organiserDetail.organiser.email}}</h5>
+                      <p>{{organiserDetail.organiser.businessDescription}}</p>
+                      <!-- <p>Conference planning is stressful enough, with a variety of challenges that impact your planning efforts. </p> -->
 
                   </div>
               </div>

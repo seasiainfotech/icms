@@ -128,7 +128,7 @@
             <!-- Indicators -->
 
             <!-- Wrapper for slides -->
-            <div class="carousel-inner custom-carousel" role="listbox">
+            <!-- <div class="carousel-inner custom-carousel" role="listbox">
                 <div class="carousel-inner">
                     <div class="col-md-6 gallery-cell" *ngFor="let session of detailData.event.speaker">
                         <div class="speakers-person">
@@ -155,7 +155,52 @@
                         </div>
                     </div>
                 </div>
+            </div> -->
+
+
+
+        <!----------->
+        <div class="carousel-inner custom-carousel" role="listbox">
+        <div  class="swiper-container" [swiper]="config" [(index)]="index">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide">
+                <div class="carousel-inner">
+                    <div class="col-md-6 gallery-cell" *ngFor="let session of detailData.event.speaker" >
+                        <div class="speakers-person">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <img class="img-responsive" src="{{session.speakerImage}}">
+                                </div>
+                                
+                                <div class="col-md-9">
+                                    <div class="speaker-content">
+                                        <h4 class="ft-bold"><span class="pink-clr">NAME : </span>{{session.name}}</h4>
+                                        <h4 class="ft-bold"><span class="pink-clr">OCCUPATION : </span>
+                                            {{session.qualification}}
+                                        </h4>
+                                        <p>{{session.description}}</p>
+                                        <ul class="social-icons list-inline">
+                                            <li><a href="https://www.facebook.com"><img src="../../assets/img/small-fb.png"></a></li>
+                                            <li><a href="https://www.twitter.com"><img src="../../assets/img/small-twitter.png"></a></li>
+                                            <li><a href="https://www.google.com"><img src="../../assets/img/small-google.png"></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+              </div>
             </div>
+           
+            <div class="swiper-scrollbar"></div>
+            <div class="swiper-pagination"></div>
+           
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+          </div>
+          </div>
+          </div>
+        <!-------------->
         </div>
     </div>
 </section>

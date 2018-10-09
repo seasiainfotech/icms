@@ -5,6 +5,8 @@ import { DatePipe } from '@angular/common';
 import Flickity from 'flickity';
 import { UsersService } from '../../services/users.service';
 import { InternetConnection } from '../../Extension/internetConnection';
+import { NgxSpinnerService } from 'ngx-spinner';
+
 
 
 @Component({
@@ -46,7 +48,7 @@ export class EventDetailComponent implements OnInit {
   public detailData: any = {};
   public dict = []; // create an empty array
  
-  constructor(private datePipe: DatePipe, private route: ActivatedRoute, private _usersService: UsersService, private _checkConnection: InternetConnection) {
+  constructor(private spinner: NgxSpinnerService,private datePipe: DatePipe, private route: ActivatedRoute, private _usersService: UsersService, private _checkConnection: InternetConnection) {
     this.route.params.subscribe(params => {
       this.eventId = params['eventId'];
 
@@ -61,11 +63,23 @@ export class EventDetailComponent implements OnInit {
       this.name = `${value}`;
       if (this.name === "true") {
        
-        let i = 0;
         let id = this.eventId.split(":");
-        this._usersService.getEventDetail("eventdetails?event_id=" + id[1] + "")
+        this._usersService.getEventDetail("event/eventdetails?event_id=" + id[1] + "")
           .subscribe(data => {
+            this.spinner.show();
             this.detailData = data;
+            if (this.detailData.code === 200){
+              setTimeout(() => {
+                this.spinner.hide();
+              }, 1000);
+            }
+            else{
+              setTimeout(() => {
+                this.spinner.hide();
+                this._checkConnection.alert(this.detailData.message);
+              }, 5000);
+            }
+            
             console.log("***event-detail*****", this.detailData);
             for (let entry of this.detailData.event.session) {
               var speakerNamee = "";
@@ -77,7 +91,7 @@ export class EventDetailComponent implements OnInit {
               speakerNamee = speakerNamee.substring(1, speakerNamee.length);
               this.speakersName.push(speakerNamee)
             }
-
+           
             this.imggg1 = this.detailData.event.eventImage2;
             this.imggg2 = this.detailData.event.eventImage3;
             this.imggg3 = this.detailData.event.eventImage4;
@@ -148,7 +162,7 @@ export class EventDetailComponent implements OnInit {
       }
       else {
         
-        this._checkConnection.internetAlert();
+        this._checkConnection.alert("You are not connected to Internet!");
       }
     });
    // this.scrollBottomToTop();
@@ -175,27 +189,6 @@ export class EventDetailComponent implements OnInit {
     window.scrollTo(0, document.body.scrollHeight)
   }
 
-  //images
-  imageObject: Array<object> = [{
-    image: this.imggg,
-    thumbImage: this.imggg
-}, {
-    image: this.imggg1,
-    thumbImage: this.imggg1
-}, {
-    image: this.imggg2,
-    thumbImage: this.imggg2
-}, {
-    image:this.imggg3,
-    thumbImage:this.imggg3
-}, {
-    image: this.imggg4,
-    thumbImage: this.imggg4
-}
-];
- 
-
-  
 }
 
 

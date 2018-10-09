@@ -11,7 +11,7 @@
             <div class="center-pic">
               <img src="../assets/img/center-img.png">
             </div>
-            <h3>Lorem ipsum event</h3>
+            <h3  style="text-transform: capitalize;">{{organizerDetail.organiser.businessName}} event</h3>
 
           </div>
         </div>
@@ -36,7 +36,7 @@
                 <div class="col-md-5 col-md-offset-4">
                   <div class="form-inner" *ngFor="let ses of session; let i = index">
                     <label class="mx-wd text-left">
-                      <input type="checkbox" (change)="sessionClicked($event,'true');"
+                      <input type="checkbox" (change)="sessionClicked($event,'true',i);"
                              (click)= "performCheck($event, i)" [(ngModel)]="ses.checked" name = "ses._id">
                       {{ses.title}}
                     </label>
@@ -64,32 +64,58 @@
                 </div>
               </div>
               </div>
-              <div class="row" *ngFor="let ticketsNo of item">
+                  
+              <div class="row"  *ngFor="let ticketsNo of item,let i = index">
                 <div class="col-md-5 col-md-offset-4 col-sm-12 col-xs-12">
                   <form class="form-inline custom-form">
                     <div class="form-group">
-                      <input type="name" class="form-control" id="name" placeholder="Name"  required=true>
+                      <input type="name" class="form-control"  id="name" placeholder="Name" [(ngModel)]="_name"  [ngModelOptions]="{standalone: true}" [value]="_name" required=true>
                     </div>
 
                     <div class="form-group">
-                      <input type="email" class="form-control" id="email" placeholder="Email"  required=true>
+                      <input type="email" class="form-control" id="email" placeholder="Email"  [(ngModel)]="_email" [ngModelOptions]="{standalone: true}"  [value]="_email" required=true>
                     </div>
-                    <div class="col-md-5 col-md-offset-4 col-sm-5 col-xs-12  text-center">
-                      <a href="javascript:;" class="btn btn-primary pink-btn" role="button">Click</a>
-                    </div>
-
-
+                   
+                      <div class = "form-group">
+                        <a href="javascript:;" class="btn button5 pink-btn " role="button" (click)="setValue();verifyUser()" [ngStyle]="{'background-color': buttonColor}" >{{buttontxt}}</a>
+                      </div>
                   </form>
                 </div>
               </div>
+              
+
+<!-- 
+              <form [formGroup]="myForm">
+  
+                <div formArrayName="phones">
+              
+                    <div *ngFor="let phone of phoneForms.controls; let i=index" 
+                          [formGroupName]="i">
+              
+                        <input formControlName="area">
+                        <input formControlName="prefix">
+                        <input formControlName="line">
+              
+                        <button (click)="deletePhone(i)">Delete</button>
+              
+                    </div>
+                </div>
+              
+                <button (click)="addPhone()">Add Phone Number</button>
+              
+              </form> -->
+
+  
               <div class="row">
                 <div class="col-md-5 col-md-offset-4 col-sm-5 col-xs-12">
-                  <p class="ft-bold amount">TOTAL AMOUNT <span class="pink-clr mr-l">{{totalamount}}</span></p>
+                  <p class="ft-bold amount">TOTAL AMOUNT <span class="pink-clr mr-l">${{totalamount}}</span></p>
                 </div>
               </div>
               <div class="row">
                   <div class="col-md-5 col-md-offset-4 col-sm-5 col-xs-12  text-center">
-                  <a href="javascript:;" class="btn btn-primary pink-btn" role="button">BOOK NOW</a>
+                  <a href="javascript:;" class="btn btn-primary pink-btn" role="button"  (click) ="addGuest()"  routerLink='/stripe/:{{totalamount}}'>BOOK NOW</a>
+                  
+                  <!-- (click) ="addGuest()" -->
                 </div>
               </div>
             </div>
@@ -100,6 +126,3 @@
     </div>
   </section>
 
-<pre>
-{{session|json}}
-</pre>

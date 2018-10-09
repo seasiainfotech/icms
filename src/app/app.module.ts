@@ -1,21 +1,32 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { AppComponent } from './app.component';
-import { HomeComponent } from './components/home/home.component';
-
+import { FormsModule,ReactiveFormsModule } from '@angular/forms';
+import { SwiperModule } from 'ngx-swiper-wrapper';
+import { SWIPER_CONFIG } from 'ngx-swiper-wrapper';
+import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
 import { RouterModule, Routes } from '@angular/router'
 import { HttpModule } from '@angular/http';
 import { HttpClientModule } from "@angular/common/http";
 import { DatePipe } from '@angular/common';
 import { FlickityModule } from 'ngx-flickity';
+
 import { InternetConnection } from './Extension/internetConnection';
 import { UsersService } from './services/users.service';
 import { EventDetailComponent } from './components/event-detail/event-detail.component';
 import { PricingDetailComponent } from './components/pricing-detail/pricing-detail.component';
 import { NgImageSliderModule } from 'ng-image-slider';
+import { BookingDetailsComponent } from './components/booking-details/booking-details.component';
+import { AlertsModule } from 'angular-alert-module';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { StripeComponent } from './components/stripe/stripe.component';
+import { AppComponent } from './app.component';
+import { HomeComponent } from './components/home/home.component';
 
 
+const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
+  direction: 'horizontal',
+  slidesPerView: 'auto'
+};
 
 
 const appRoutes: Routes = [
@@ -32,6 +43,15 @@ const appRoutes: Routes = [
   {
     path: 'bookNow/:eventId',
     component: PricingDetailComponent
+  },
+
+  {
+    path: 'bookingDetail/:addguest',
+    component:BookingDetailsComponent
+  },
+  {
+    path: 'stripe/:price',
+    component:StripeComponent
   }
 
 ];
@@ -41,7 +61,9 @@ const appRoutes: Routes = [
     AppComponent,
     HomeComponent,
     EventDetailComponent,
-    PricingDetailComponent
+    PricingDetailComponent,
+    BookingDetailsComponent,
+    StripeComponent
   ],
   imports: [
     BrowserModule,
@@ -50,13 +72,19 @@ const appRoutes: Routes = [
     HttpClientModule,
     NgImageSliderModule,
     FormsModule,
-
+    ReactiveFormsModule,
+    AlertsModule.forRoot(),
+    NgxSpinnerModule,
+    SwiperModule,
     RouterModule.forRoot(appRoutes, {
       scrollPositionRestoration: 'enabled',
     })
   ],
- 
-  providers: [UsersService, DatePipe, InternetConnection],
+  
+  providers: [UsersService, DatePipe, InternetConnection, {
+    provide: SWIPER_CONFIG,
+    useValue: DEFAULT_SWIPER_CONFIG
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

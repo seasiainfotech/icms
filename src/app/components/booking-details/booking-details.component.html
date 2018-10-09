@@ -1,0 +1,70 @@
+<div calss = "" id="component1"> 
+<section class="event-list">
+  <div class="container" >
+    <div class="barcode-outer">
+      <ul class="list-inline" >
+        <li *ngFor = "let barimage of userDetail.ticket">
+          <img class="img-responsive" src="{{barimage.barCode}}">
+          <h5>{{barimage.name}}</h5>
+          <h5>{{barimage.email}}</h5>
+        </li>
+        <!-- <li>
+          <img class="img-responsive" src="../assets/img/code1.jpg">
+          <h5>BARCODE 2</h5>
+        </li>
+        <li>
+          <img class="img-responsive" src="../assets/img/code1.jpg">
+          <h5>BARCODE 3</h5>
+        </li> -->
+      </ul>
+      
+    </div>
+  </div>
+</section>
+
+<section class="booking"> 
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-8">
+        <h4 class="pink-clr ft-bold">BOOKING DETAILS</h4>
+        <p class="ft-bold">{{userDetail.event.description}}</p>
+      </div>
+      <div class="col-md-4">
+        <h4 class="pink-clr ft-bold">SESSION SUBSCRIBED :</h4>
+        <div class = ""  *ngFor="let sessionList of userDetail.buySessions">
+          <h5 class="ft-bold">{{sessionList.title}}</h5>
+        </div>
+       
+        <h4 class="pink-clr ft-bold">NO. OF TICKETS :</h4>
+        <h5 class="ft-bold">{{userDetail.ticketCount}}</h5>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+
+<section class="book-now">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <a href="javascript:;" class="btn btn-primary pink-btn" role="button"  (click)="printComponent('component1')">PRINT</a>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="app">
+  <div class="container">
+    <div class="app-outer">
+    <div class="event-page-heading text-center">
+        <h2 >DOWNLOAD APP</h2>
+      </div>
+    <div class="row">
+      <div class="col-sm-12 text-center">
+      <a href="javascript:;"><img src="../assets/img/app-store-1.png"> </a>
+      <a  download="filename" target="_blank" href="/assets/img/app-store-1.png" href="javascript:;"><img src="../assets/img/app-store-2.png"> </a>
+      </div>
+    </div>
+    </div>
+  </div>
+</section>
+

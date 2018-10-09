@@ -226,6 +226,28 @@ margin-bottom: 8px;}
 .custom-form { display: inline-flex; width: 100%; }
 
 
+  /* Specific css for <Alert Type> */
+  .alertsContainer .alertsRow {
+    border: 1px solid #ffc549;
+}
+.alertsContainer .alertsRow.iconpanel {
+    background:#ffc549;
+    color: #fff;
+}
+.alertsContainer .alertsRow.messagepanel {
+    color: #000;
+    background: #fff;
+}
+.alertsContainer .alertsRow.closeicon {
+    color: #000;
+}
+.alertsContainer .alertsRow.closeicon a {
+    color: #000;
+    text-decoration: none;
+    font-size: 12px;
+}
+/* Specific css for <Alert Type> */
+
 
 	/** RESPONSIVE CSS **/
 @media screen and (max-width:1271px){

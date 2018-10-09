@@ -14,8 +14,8 @@ export class InternetConnection {
         )
       }
        //Alert
-     internetAlert() {
-     alert("You are not connected to Internet!");
+    alert(messsage) {
+     alert(messsage);
 }
 
 // convertUtc(utcDate){
